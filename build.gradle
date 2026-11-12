@@ -1,47 +1,53 @@
 plugins {
-    id 'fabric-loom' version '1.6-SNAPSHOT' apply false
+    id 'net.fabricmc.fabric-loom' version "${loom_version}"
     id 'maven-publish'
 }
 
-group = 'com.chatfilter'
-version = '1.0.2'
+version = project.version
+group = project.group
 
 repositories {
-    maven { url 'https://maven.fabricmc.net/' }
     mavenCentral()
 }
 
 dependencies {
-    minecraft 'com.mojang:minecraft:26.3'
-    mappings 'net.fabricmc:yarn:26.3+build.2'
-    modImplementation 'net.fabricmc:fabric-loader:0.19.5'
-    modImplementation 'net.fabricmc.fabric-api:fabric-api:0.165.2+26.3'
-    include 'net.fabricmc.fabric-api:fabric-api'
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 }
 
 processResources {
-    inputs.property 'version', project.version
-    filteringCharset 'UTF-8'
+    def modVersion = project.version
+    inputs.property 'version', modVersion
+
+    filesMatching('fabric.mod.json') {
+        expand 'version': modVersion
+    }
 }
 
-tasks.named('jar') {
-    dependsOn 'processResources'
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 25
+}
+
+java {
+    withSourcesJar()
+
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
+}
+
+jar {
+    inputs.property 'projectName', project.name
     manifest {
         attributes 'Implementation-Title': project.name,
                    'Implementation-Version': project.version
     }
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
-}
-
-loom {
-    runs {
-        client {
-            workingDirectory project.file('run')
-            property 'fabric-loader.mappings', 'yarn'
+publishing {
+    publications {
+        create('mavenJava', MavenPublication) {
+            from components.java
         }
     }
 }

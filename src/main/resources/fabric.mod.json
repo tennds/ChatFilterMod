@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "chatfilter",
-  "version": "1.0.2",
+  "version": "${version}",
   "name": "Chat Filter",
   "description": "Hide chat messages from selected players. Commands: /addignore <nick>, /removeignore <nick>, /listignore.",
   "authors": [
@@ -18,9 +18,9 @@
     "chatfilter.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.19.5",
+    "fabricloader": ">=0.20.1",
     "fabric-api": "*",
-    "minecraft": ">=26.3 <26.4",
-    "java": ">=21"
+    "minecraft": "~26.3",
+    "java": ">=25"
   }
 }

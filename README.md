@@ -24,9 +24,9 @@ A Fabric client-side mod for Minecraft 26.3 that lets you hide chat messages fro
 
 ### From source
 
-1. Install **JDK 21+**
+1. Install **JDK 25+**
 2. Clone this repository
-3. Run `./gradlew build` (first run `./gradlew wrapper` if you don't have Gradle installed)
+3. Run `./gradlew build` (the Gradle wrapper is included, so no separate Gradle install is needed)
 4. Find the compiled `.jar` in `build/libs/`
 5. Place it in `.minecraft/mods/` of your Prism Launcher instance (or any Fabric instance)
 6. Make sure **Fabric API** is installed
@@ -58,9 +58,16 @@ It is purely client-side chat filtering.
 ## Requirements
 
 - Minecraft 26.3
-- Fabric Loader 0.19.5+
+- Fabric Loader 0.20.1+
 - Fabric API 0.165.2+
-- Java 21+
+- Java 25+
+
+## Building in IntelliJ IDEA
+
+1. Open the project folder in IntelliJ IDEA (2025.3 or newer)
+2. Import the Gradle project when prompted
+3. In the Gradle panel: `Tasks` → `build` → `build`
+4. The `.jar` will appear in `build/libs/`
 
 ## License
 
