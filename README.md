@@ -58,7 +58,7 @@ It is purely client-side chat filtering.
 ## Requirements
 
 - Minecraft 26.3
-- Fabric Loader 0.20.1+
+- Fabric Loader 0.19.5+
 - Fabric API 0.165.2+
 - Java 25+
 
